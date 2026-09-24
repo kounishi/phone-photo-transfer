@@ -1,0 +1,37 @@
+appId: jp.ne.njs.phonephototransfer
+productName: iPhone Photo Transfer
+copyright: Copyright (c) 2026
+
+directories:
+  output: dist
+  buildResources: build
+
+files:
+  - src/**/*
+  - package.json
+  - "!**/*.map"
+
+asar: true
+
+# libheif-js は wasm-bundle.js に WASM を base64 で埋め込んでおり、
+# 別ファイルの .wasm を読みに行かない。asar の中のままで HEIC 変換が動くことを
+# パッケージ版で実測済みなので、asarUnpack は不要。
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+  # コード署名なし。初回起動時に SmartScreen の警告が出る（README 参照）
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: iPhone写真取り込み
+
+portable:
+  artifactName: ${productName}-${version}-portable.${ext}

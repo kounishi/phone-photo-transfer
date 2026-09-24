@@ -1,0 +1,188 @@
+:root {
+  --bg: #0f1115;
+  --panel: #171a21;
+  --panel-2: #1e222b;
+  --line: #2b303b;
+  --text: #e8eaed;
+  --muted: #9aa0a6;
+  --accent: #4c8dff;
+  --ok: #3ddc97;
+  --warn: #ffb454;
+  --err: #ff6b6b;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, "Segoe UI", "Yu Gothic UI", "Meiryo", sans-serif;
+  font-size: 14px;
+}
+
+body { display: flex; flex-direction: column; }
+
+code { font-family: "Cascadia Mono", "Consolas", monospace; }
+
+/* ---------- 上部バー ---------- */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 14px 20px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  -webkit-app-region: drag;
+}
+.topbar button, .topbar select { -webkit-app-region: no-drag; }
+
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark { font-size: 20px; }
+.brand h1 { font-size: 15px; font-weight: 600; margin: 0; }
+
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+
+.badge {
+  font-size: 12px; padding: 5px 12px; border-radius: 999px;
+  background: var(--panel-2); color: var(--muted);
+  border: 1px solid var(--line);
+}
+.badge.on { background: rgba(61,220,151,.12); color: var(--ok); border-color: rgba(61,220,151,.4); }
+
+/* ---------- 通知 ---------- */
+.alert {
+  margin: 14px 20px 0; padding: 12px 16px;
+  border-radius: 10px; font-size: 13px; line-height: 1.7;
+  background: rgba(255,107,107,.12);
+  border: 1px solid rgba(255,107,107,.4);
+  color: #ffc9c9;
+}
+.alert[hidden] { display: none; }
+
+/* ---------- レイアウト ---------- */
+.grid {
+  flex: 1; min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(340px, 1fr) minmax(340px, 1fr);
+  grid-auto-rows: min-content;
+  gap: 16px; padding: 16px 20px;
+  overflow-y: auto;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+}
+.card-wide { grid-column: 1 / -1; }
+.card h2 { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 16px; letter-spacing: .04em; }
+
+.card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.card-head h2 { margin: 0; }
+.card-head-right { display: flex; align-items: center; gap: 12px; }
+
+/* ---------- QR ---------- */
+.qr-wrap { text-align: center; margin-bottom: 18px; }
+.qr {
+  width: 210px; height: 210px;
+  border-radius: 12px; background: #fff; padding: 10px;
+  display: inline-block;
+}
+.qr-help { font-size: 12px; color: var(--muted); line-height: 1.8; margin: 12px 0 0; }
+
+.kv {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 8px 16px; margin: 0 0 18px; align-items: baseline;
+}
+.kv dt { font-size: 12px; color: var(--muted); }
+.kv dd { margin: 0; min-width: 0; }
+.kv code {
+  font-size: 13px; word-break: break-all;
+  background: var(--panel-2); padding: 4px 8px; border-radius: 6px;
+  display: inline-block;
+}
+.pin { font-size: 20px !important; letter-spacing: .26em; color: var(--accent); font-weight: 600; }
+
+/* ---------- フォーム ---------- */
+.field { display: block; margin-bottom: 12px; }
+.field-label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+
+select {
+  width: 100%; padding: 9px 10px;
+  background: var(--panel-2); color: var(--text);
+  border: 1px solid var(--line); border-radius: 8px;
+  font-family: inherit; font-size: 13px;
+}
+
+.pathrow { margin-bottom: 12px; }
+.path {
+  display: block; padding: 10px 12px;
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px;
+  font-size: 12px; word-break: break-all; line-height: 1.6;
+}
+
+.btnrow { display: flex; gap: 10px; margin-bottom: 16px; }
+
+.check { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.6; cursor: pointer; }
+.quality-field { margin-top: 16px; margin-bottom: 0; }
+.check input { margin: 2px 0 0; accent-color: var(--accent); }
+
+.hint { font-size: 12px; color: var(--muted); line-height: 1.8; margin: 14px 0 0; }
+
+/* ---------- ボタン ---------- */
+.btn {
+  padding: 9px 18px; font-size: 13px; font-weight: 600; font-family: inherit;
+  border: 0; border-radius: 9px; cursor: pointer; color: #fff;
+}
+.btn:disabled { opacity: .45; cursor: default; }
+.btn-primary { background: var(--accent); }
+.btn-primary.stop { background: var(--panel-2); color: var(--text); border: 1px solid var(--line); }
+.btn-ghost { background: var(--panel-2); color: var(--text); border: 1px solid var(--line); }
+.btn-ghost:hover:not(:disabled) { background: #262b36; }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+
+/* ---------- 受信一覧 ---------- */
+.counts { font-size: 12px; color: var(--muted); }
+
+.log { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; max-height: 340px; overflow-y: auto; }
+.log:empty { display: none; }
+
+.row {
+  display: grid; grid-template-columns: 44px 1fr auto auto;
+  align-items: center; gap: 12px;
+  padding: 8px 10px;
+  background: var(--panel-2);
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+.row.dup { border-color: rgba(255,180,84,.35); }
+.row.err { border-color: rgba(255,107,107,.4); }
+
+.row .thumb {
+  width: 44px; height: 44px; border-radius: 7px;
+  object-fit: cover; background: #0c0e12; display: block;
+}
+.row .name {
+  font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.row .sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.row .sub.ok { color: var(--ok); }
+.row .sub.dup { color: var(--warn); }
+.row .sub.err { color: var(--err); }
+.row .size { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+.offnote {
+  font-size: 13px; color: var(--muted); line-height: 1.8;
+  text-align: center; padding: 22px 12px; margin: 0;
+}
+.offnote[hidden] { display: none; }
+
+/* ---------- 脚注 ---------- */
+.footnote {
+  padding: 12px 20px; font-size: 11px; color: var(--muted); line-height: 1.7;
+  border-top: 1px solid var(--line); background: var(--panel);
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+}

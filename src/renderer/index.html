@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'none'; img-src 'self' data: file:; style-src 'self'; script-src 'self';">
+<title>iPhone 写真取り込み</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">📷</span>
+    <h1>iPhone 写真取り込み</h1>
+  </div>
+  <div class="topbar-right">
+    <span id="statusBadge" class="badge">停止中</span>
+    <button id="toggleBtn" type="button" class="btn btn-primary">待受を開始</button>
+  </div>
+</header>
+
+<div id="alert" class="alert" hidden></div>
+
+<main class="grid">
+
+  <!-- 接続 -->
+  <section class="card">
+    <h2>iPhone から接続する</h2>
+
+    <div id="connOn">
+      <div class="qr-wrap">
+        <img id="qr" class="qr" alt="接続用 QR コード">
+        <p class="qr-help">
+          iPhone の<strong>カメラ</strong>でこの QR を読み取り、<br>
+          表示されたリンクを開いてください。
+        </p>
+      </div>
+
+      <dl class="kv">
+        <dt>アドレス</dt>
+        <dd><code id="url">—</code></dd>
+        <dt>PIN</dt>
+        <dd><code id="pin" class="pin">—</code></dd>
+      </dl>
+
+      <label class="field">
+        <span class="field-label">接続に使うネットワーク</span>
+        <select id="addrSelect"></select>
+      </label>
+      <p class="hint">
+        iPhone とパソコンが<strong>同じ Wi-Fi</strong> につながっている必要があります。
+        つながらないときは、別のネットワークを選んでみてください。
+      </p>
+    </div>
+
+    <div id="connOff" class="offnote" hidden>
+      待受を開始すると、接続用の QR コードと PIN が表示されます。
+    </div>
+  </section>
+
+  <!-- 保存設定 -->
+  <section class="card">
+    <h2>保存先</h2>
+
+    <div class="pathrow">
+      <code id="saveDir" class="path">—</code>
+    </div>
+    <div class="btnrow">
+      <button id="pickDirBtn" type="button" class="btn btn-ghost">変更する</button>
+      <button id="openDirBtn" type="button" class="btn btn-ghost">フォルダを開く</button>
+    </div>
+
+    <label class="check">
+      <input id="dateFolders" type="checkbox">
+      <span>撮影日ごとのフォルダ（2026-09-12）に分けて保存する</span>
+    </label>
+
+    <label class="field quality-field">
+      <span class="field-label">HEIC を JPEG にするときの画質</span>
+      <select id="quality">
+        <option value="0.95">高画質（ファイルは大きめ）</option>
+        <option value="0.92">標準</option>
+        <option value="0.85">容量優先（ファイルは小さめ）</option>
+      </select>
+    </label>
+
+    <p class="hint">
+      HEIC の写真は JPEG に変換して保存します。撮影日時・向き・位置情報は引き継ぎます。<br>
+      同じ写真を二度送っても、重複として保存されません。
+    </p>
+  </section>
+
+  <!-- 受信一覧 -->
+  <section class="card card-wide">
+    <div class="card-head">
+      <h2>取り込んだ写真</h2>
+      <div class="card-head-right">
+        <span id="counts" class="counts">まだありません</span>
+        <button id="clearLogBtn" type="button" class="btn btn-ghost btn-sm">表示を消す</button>
+      </div>
+    </div>
+    <ul id="log" class="log"></ul>
+    <p id="logEmpty" class="offnote">
+      iPhone で写真を選んで送信すると、ここに表示されます。
+    </p>
+  </section>
+
+</main>
+
+<footer class="footnote">
+  送信しても iPhone の写真は消えません（コピーです）。初回は Windows ファイアウォールの
+  「プライベート ネットワーク」でのアクセスを許可してください。
+</footer>
+
+<script src="renderer.js"></script>
+</body>
+</html>

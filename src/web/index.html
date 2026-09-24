@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0f1115">
+<title>写真をパソコンへ送る</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="bar">
+  <h1>写真をパソコンへ送る</h1>
+  <span id="conn" class="conn">接続確認中…</span>
+</header>
+
+<main>
+  <!-- 選択前 -->
+  <section id="empty" class="empty">
+    <div class="empty-art" aria-hidden="true">🖼️</div>
+    <p class="empty-lead">送りたい写真を選んでください。</p>
+    <p class="empty-sub">選んだ写真だけがパソコンに保存されます。</p>
+  </section>
+
+  <!-- 選択後の一覧 -->
+  <section id="listWrap" hidden>
+    <div class="summary">
+      <span id="summaryText">—</span>
+      <button id="clearBtn" type="button" class="linkbtn">すべて取り消す</button>
+    </div>
+    <ul id="list" class="list"></ul>
+  </section>
+
+  <section id="resultWrap" class="result" hidden>
+    <div id="resultText"></div>
+    <p class="notice">
+      送信しても iPhone の写真は消えません。
+      不要になったら「写真」アプリで削除してください。
+    </p>
+  </section>
+</main>
+
+<footer class="actions">
+  <input id="picker" type="file" accept="image/*" multiple hidden>
+  <button id="pickBtn" type="button" class="btn btn-secondary">写真を選ぶ</button>
+  <button id="sendBtn" type="button" class="btn btn-primary" hidden>パソコンに送る</button>
+  <button id="retryBtn" type="button" class="btn btn-warn" hidden>失敗した分だけ再送</button>
+  <p id="hint" class="hint">送信中は画面を消さないでください。</p>
+</footer>
+
+<script src="/assets/app.js"></script>
+</body>
+</html>
